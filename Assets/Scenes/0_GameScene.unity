@@ -167,6 +167,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1996932059}
+  - {fileID: 1364063766}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -335,8 +336,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelGenericConfig: {fileID: 11400000, guid: e29358c7ae146c943bb998429e8a9b34, type: 2}
+  _piecesToSpawnConfigs:
+  - {fileID: 11400000, guid: 4a4a466a458736b46a2c550c951c7efa, type: 2}
+  - {fileID: 11400000, guid: f7ea26f42c8f10949912ef7bf4f1d6dc, type: 2}
+  - {fileID: 11400000, guid: 7ee255707c1ed12479d8035a2fa7b371, type: 2}
+  - {fileID: 11400000, guid: 9d53ded8fdd836d4983e21f76318cb8e, type: 2}
+  - {fileID: 11400000, guid: 4ef81d08f272676428774d10a3e61d9d, type: 2}
   _gameController: {fileID: 84643520}
   _boardRenderer: {fileID: 1996932058}
+  _piecesPoolsFacade: {fileID: 1364063767}
+--- !u!1 &1364063765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1364063766}
+  - component: {fileID: 1364063767}
+  m_Layer: 0
+  m_Name: Pieces_Pools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1364063766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364063765}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84643521}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1364063767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364063765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d8a8c38cb44001958a6994626ec2a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _piecesPoolsConfigs:
+  - {fileID: 11400000, guid: 3d3b4b2a12eda14449913d9ad70b1a3f, type: 2}
+  - {fileID: 11400000, guid: f780235a7991a6d448be2132899255f4, type: 2}
+  - {fileID: 11400000, guid: 97b204b2e1d32e443b5e2d3a6ced2e4b, type: 2}
+  - {fileID: 11400000, guid: 69c075bfda286d7479b6bc438baf8225, type: 2}
+  - {fileID: 11400000, guid: d5774115e400f824eb418c358076b9e8, type: 2}
+  _piecesPoolContainer: {fileID: 1364063766}
 --- !u!1 &1811195870
 GameObject:
   m_ObjectHideFlags: 0

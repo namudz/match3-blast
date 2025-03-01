@@ -1,5 +1,6 @@
 using ApplicationLayer.Services;
 using ApplicationLayer.Services.Gameplay;
+using ApplicationLayer.Services.Pooling;
 using ApplicationLayer.Services.Random;
 using ApplicationLayer.Services.SignalDispatcher;
 using UnityEngine;
@@ -11,10 +12,12 @@ namespace Installers
     {
         [Header("Configs")]
         [SerializeField] private LevelGenericConfig _levelGenericConfig;
+        [SerializeField] private PieceSpawnConfig[] _piecesToSpawnConfigs;
         
         [Header("Dependencies")]
         [SerializeField] private GameController _gameController;
         [SerializeField] private BoardRenderer _boardRenderer;
+        [SerializeField] private PiecesPoolsFacade _piecesPoolsFacade;
         
         private ISignalDispatcher _signalDispatcher;
         private IRandomFacade _randomFacade;
@@ -44,8 +47,10 @@ namespace Installers
             _randomFacade = new RandomFacade();
             ServiceLocator.Instance.RegisterService(_randomFacade);
             
-            _gameFlowExecutor = new GameFlowExecutor(new BoardGenerator());
+            _gameFlowExecutor = new GameFlowExecutor(new BoardGenerator(), new BoardFiller(_piecesToSpawnConfigs, _randomFacade));
             ServiceLocator.Instance.RegisterService(_gameFlowExecutor);
+            
+            _piecesPoolsFacade.Initialize();
         }
         
         private void InjectDependencies()
@@ -56,7 +61,7 @@ namespace Installers
                 _signalDispatcher
             );
             
-            _boardRenderer.Inject(_signalDispatcher);
+            _boardRenderer.Inject(_piecesPoolsFacade, _signalDispatcher);
         }
         
         private void UnregisterServices()
