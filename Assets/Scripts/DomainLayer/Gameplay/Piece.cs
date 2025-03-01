@@ -9,7 +9,7 @@ namespace DomainLayer.Gameplay
         {
             Blue,
             Green,
-            Orange,
+            Pink,
             Red,
             Yellow
         }
