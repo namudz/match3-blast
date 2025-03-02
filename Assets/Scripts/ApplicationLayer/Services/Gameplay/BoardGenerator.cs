@@ -1,4 +1,4 @@
-using System;
+using ApplicationLayer.Services.Random;
 using DomainLayer.Gameplay;
 using UnityEngine;
 
@@ -6,11 +6,17 @@ namespace ApplicationLayer.Services.Gameplay
 {
     public class BoardGenerator : IBoardGenerator
     {
+        private readonly IRandomFacade _randomFacade;
+
+        public BoardGenerator(IRandomFacade randomFacade)
+        {
+            _randomFacade = randomFacade;
+        }
+        
         public Board GenerateBoard(Vector2Int rowsRange, Vector2Int columnsRange)
         {
-            var random = new System.Random(Guid.NewGuid().GetHashCode());
-            var rows = random.Next(rowsRange.x, rowsRange.y + 1);
-            var columns = random.Next(columnsRange.x, columnsRange.y + 1);
+            var rows = _randomFacade.Next(rowsRange.x, rowsRange.y + 1);
+            var columns = _randomFacade.Next(columnsRange.x, columnsRange.y + 1);
 
             var cells = new Cell[rows, columns];
             for (var row = 0; row < rows; ++row)

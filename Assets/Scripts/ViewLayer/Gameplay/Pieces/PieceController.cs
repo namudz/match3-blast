@@ -7,5 +7,10 @@ namespace ViewLayer.Gameplay.Pieces
     public class PieceController : MonoBehaviour, IPoolable
     {
         [SerializeField] protected PieceAnimatorController _animatorController;
+
+        public UniTask DestroyPiece()
+        {
+            return _animatorController.DestroyPiece();
+        }
     }
 }

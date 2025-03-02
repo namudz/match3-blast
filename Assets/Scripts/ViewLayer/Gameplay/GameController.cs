@@ -1,8 +1,11 @@
 using ApplicationLayer.Services.Gameplay;
+using ApplicationLayer.Services.Gameplay.DTOs;
+using ApplicationLayer.Services.Gameplay.Input;
+using ApplicationLayer.Services.Gameplay.Signals;
 using ApplicationLayer.Services.SignalDispatcher;
+using Cysharp.Threading.Tasks;
 using DomainLayer.Gameplay;
 using UnityEngine;
-using ViewLayer.Gameplay.Signals;
 
 namespace ViewLayer.Gameplay
 {
@@ -12,9 +15,10 @@ namespace ViewLayer.Gameplay
         [SerializeField] private BoardRenderer _boardRenderer;
         [SerializeField] private CameraController _cameraController;
 
+        private LevelGenericConfig _levelGenericConfig;
         private IGameFlowExecutor _gameFlowExecutor;
         private ISignalDispatcher _signalDispatcher;
-        private LevelGenericConfig _levelGenericConfig;
+        private IInputHandler _inputHandler;
         private Board _board;
         public bool IsBoardReady { get; private set; } = true;
         public bool IsGameAlive => _gameFlowExecutor.IsAlive;
@@ -22,11 +26,15 @@ namespace ViewLayer.Gameplay
         public void InjectDependencies(
             LevelGenericConfig levelGenericConfig,
             IGameFlowExecutor gameFlowExecutor,
-            ISignalDispatcher signalDispatcher)
+            ISignalDispatcher signalDispatcher, 
+            IInputHandler inputHandler)
         {
             _levelGenericConfig = levelGenericConfig;
             _gameFlowExecutor = gameFlowExecutor;
             _signalDispatcher = signalDispatcher;
+            _inputHandler = inputHandler;
+            
+            _signalDispatcher.Subscribe<CascadeStartedSignal>(HandleCascadeStarted);
         }
 
         public void StartGame()
@@ -34,13 +42,18 @@ namespace ViewLayer.Gameplay
             LoadGame();
             RenderGame();
             
-            _signalDispatcher.Dispatch(new LevelReadySignal());
+            // _signalDispatcher.Dispatch(new LevelReadySignal());
+
+            _gameFlowExecutor.Start();
         }
 
         private void LoadGame()
         {
             // Create board
             _board = _gameFlowExecutor.CreateBoard(_levelGenericConfig.BoardRowsRange, _levelGenericConfig.BoardColumnsRange);
+            
+            // Setup input
+            _inputHandler.SetBoard(_board);
 
             // Center camera    
             _cameraController.CenterOnBoard(_board);
@@ -49,6 +62,27 @@ namespace ViewLayer.Gameplay
         private void RenderGame()
         {
             _boardRenderer.RenderBoard(_board);
+        }
+        
+        private void HandleCascadeStarted(CascadeStartedSignal signal)
+        {
+            ExecuteCascadeSteps(signal).Forget();
+        }
+
+        private async UniTask ExecuteCascadeSteps(CascadeStartedSignal signal)
+        {
+            IsBoardReady = false;
+
+            foreach (var cascadeStep in signal.CascadeSteps)
+            {
+                if (cascadeStep is CascadeMatchStep matchStep)
+                {
+                    await _boardRenderer.DestroyMatchPieces(matchStep.MatchCells);
+                    continue;
+                }
+            }
+
+            IsBoardReady = true;
         }
     }
 }

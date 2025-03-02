@@ -25,9 +25,15 @@ namespace ViewLayer.Gameplay
 
         private void SetOrthographicSize(Board board)
         {
+            if (board.Rows == board.Columns)
+            {
+                _camera.orthographicSize = board.Rows + 0.5f;
+                return;
+            }
+            
             var size = board.Rows > board.Columns
-                ? board.Rows
-                : board.Columns + 1;
+                ? board.Rows - .5f
+                : board.Columns + .5f;
             _camera.orthographicSize = size;
         }
     }
