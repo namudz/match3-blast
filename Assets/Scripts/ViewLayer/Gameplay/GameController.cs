@@ -41,8 +41,6 @@ namespace ViewLayer.Gameplay
         {
             LoadGame();
             RenderGame();
-            
-            // _signalDispatcher.Dispatch(new LevelReadySignal());
 
             _gameFlowExecutor.Start();
         }
