@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BluePiece_SpawnConfig
   m_EditorClassIdentifier: 
   PieceType: 0
-  Weight: 15
+  Weight: 10

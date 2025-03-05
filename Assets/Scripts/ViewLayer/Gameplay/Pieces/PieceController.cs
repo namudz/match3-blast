@@ -12,5 +12,15 @@ namespace ViewLayer.Gameplay.Pieces
         {
             return _animatorController.DestroyPiece();
         }
+        
+        public UniTask FallTo(Vector3 to, int dropHeightCells)
+        {
+            return _animatorController.FallTo(to, dropHeightCells);
+        }
+
+        public UniTask SpawnAndFallTo(Vector3 to, int dropHeightCells, float delay)
+        {
+            return _animatorController.SpawnAndFallTo(to, dropHeightCells, delay);
+        }
     }
 }

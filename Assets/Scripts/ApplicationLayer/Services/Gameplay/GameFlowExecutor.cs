@@ -13,6 +13,7 @@ namespace ApplicationLayer.Services.Gameplay
         private readonly IBoardGenerator _boardGenerator;
         private readonly IBoardFiller _boardFiller;
         private readonly ICellTappedExecutor _cellTappedExecutor;
+        private readonly IBoardGravityExecutor _boardGravityExecutor;
         private readonly ISignalDispatcher _signalDispatcher;
 
         private Board _board;
@@ -24,11 +25,13 @@ namespace ApplicationLayer.Services.Gameplay
             IBoardGenerator boardGenerator,
             IBoardFiller boardFiller,
             ICellTappedExecutor cellTappedExecutor,
+            IBoardGravityExecutor boardGravityExecutor,
             ISignalDispatcher signalDispatcher)
         {
             _boardGenerator = boardGenerator;
             _boardFiller = boardFiller;
             _cellTappedExecutor = cellTappedExecutor;
+            _boardGravityExecutor = boardGravityExecutor;
             _signalDispatcher = signalDispatcher;
 
             _cellTappedExecutor.OnCellTapped += HandleCellTapped;
@@ -72,7 +75,11 @@ namespace ApplicationLayer.Services.Gameplay
         
         private void TryCalculateCascadeSteps(in ICollection<ICascadeStep> cascadeSteps)
         {
-            // TODO: gravity + refill board
+            var gravityStep = _boardGravityExecutor.TryApplyGravity(_board);
+            cascadeSteps.Add(gravityStep);
+            
+            var refillStep = _boardFiller.Refill(_board);
+            cascadeSteps.Add(refillStep);
         }
     }
 }

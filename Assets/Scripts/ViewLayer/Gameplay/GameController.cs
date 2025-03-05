@@ -80,6 +80,18 @@ namespace ViewLayer.Gameplay
                     await _boardRenderer.DestroyMatchPieces(matchStep.MatchCells);
                     continue;
                 }
+                
+                if (cascadeStep is CascadeGravityStep gravityStep)
+                {
+                    await _boardRenderer.ApplyGravity(gravityStep.Steps);
+                    continue;
+                }
+
+                if (cascadeStep is CascadeRefillStep refillStep)
+                {
+                    await _boardRenderer.Refill(refillStep.Steps);
+                    continue;
+                }
             }
 
             IsBoardReady = true;

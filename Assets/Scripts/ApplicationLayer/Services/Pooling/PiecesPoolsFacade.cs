@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using ApplicationLayer.Services.SignalDispatcher;
-using ApplicationLayer.Signals;
 using DomainLayer.Gameplay;
 using UnityEngine;
 

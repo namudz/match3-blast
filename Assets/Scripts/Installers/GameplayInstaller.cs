@@ -58,6 +58,7 @@ namespace Installers
                 new BoardGenerator(_randomFacade), 
                 new BoardFiller(_piecesToSpawnConfigs, _randomFacade),
                 cellTappedExecutor,
+                new BoardGravityExecutor(),
                 _signalDispatcher
             );
             ServiceLocator.Instance.RegisterService(_gameFlowExecutor);
