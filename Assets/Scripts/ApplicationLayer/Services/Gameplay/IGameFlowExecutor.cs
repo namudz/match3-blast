@@ -1,5 +1,3 @@
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using DomainLayer.Gameplay;
 using UnityEngine;
 
@@ -10,6 +8,6 @@ namespace ApplicationLayer.Services.Gameplay
         bool IsAlive { get; }
         
         Board CreateBoard(Vector2Int rowsRange, Vector2Int columnsRange);
-        UniTask Start(CancellationToken cancellationToken);
+        void Start();
     }
 }

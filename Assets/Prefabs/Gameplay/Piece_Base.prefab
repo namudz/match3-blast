@@ -25,6 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 284755637066778520}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,7 +33,6 @@ Transform:
   m_Children:
   - {fileID: 1631630185784221583}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4348268924223566029
 MonoBehaviour:
@@ -61,6 +61,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyDuration: 0.15
   _destroyEase: 26
+  _fallDurationPerCell: 0.1
+  _fallCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.302508
+      outSlope: 3.302508
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.03101805
+    - serializedVersion: 3
+      time: 0.8498935
+      value: 1.0094107
+      inSlope: 0.13585836
+      outSlope: 0.13585836
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.207613
+    - serializedVersion: 3
+      time: 0.92718506
+      value: 0.99492514
+      inSlope: -0.072126195
+      outSlope: -0.072126195
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _fallSqueezeScale: {x: 0.9, y: 1.1, z: 0}
+  _fallSqueezeDuration: 0.1
+  _fallSqueezeEase: 12
+  _fallSqueezeRestoreDuration: 0.1
+  _fallSqueezeRestoreEase: 27
+  _spawnFadeInDuration: 0.15
+  _spawnFadeInEase: 12
 --- !u!1 &2095025761727198591
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,13 +135,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095025761727198591}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3256927980564956462}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5676399513550995215
 SpriteRenderer:

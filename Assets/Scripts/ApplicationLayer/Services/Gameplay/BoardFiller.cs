@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using ApplicationLayer.Services.Gameplay.DTOs;
 using ApplicationLayer.Services.Random;
 using DomainLayer.Gameplay;
+using UnityEngine;
 
 namespace ApplicationLayer.Services.Gameplay
 {
@@ -25,6 +28,36 @@ namespace ApplicationLayer.Services.Gameplay
                     board.Cells[row, col].Piece = GetValidPiece();
                 }
             }
+        }
+        
+        public CascadeRefillStep Refill(Board board)
+        {
+            var steps = new List<RefillStep>();
+            
+            for (var row = 0; row < board.Rows; ++row)
+            {
+                for (var col = 0; col < board.Columns; ++col)
+                {
+                    var cell = board.Cells[row, col]; 
+                    if (!cell.IsEmpty) { continue; }
+
+                    var newPiece = GetValidPiece();
+                    cell.Piece = newPiece;
+
+                    var refillStep = new RefillStep(
+                        new Vector3(
+                            col * Cell.WorldSize.x + Cell.PieceOffset.x, 
+                            board.Rows * Cell.WorldSize.y + Cell.PieceOffset.y, 
+                            0f
+                        ), 
+                        cell.Clone(), // Clone for the view
+                        board.Rows - row
+                    );
+                    steps.Add(refillStep);
+                }
+            }
+
+            return new CascadeRefillStep(steps);
         }
 
         private Piece GetValidPiece()
