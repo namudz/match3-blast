@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b0e1c7f3074a669542b6693a16ed18, type: 3}
+  m_Name: BluePiece_PoolConfig
+  m_EditorClassIdentifier: 
+  PoolData:
+    Prefab: {fileID: 7537452645849830694, guid: eb38a4fb73ad0ee47af63448e5a30ead, type: 3}
+    InitialAmount: 12
+  PieceType: 0
